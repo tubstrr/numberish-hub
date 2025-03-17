@@ -6,7 +6,11 @@ export default defineNuxtConfig({
   future: { compatibilityVersion: 4 },
   // Nuxt Modules
   // https://nuxt.com/modules
-  modules: ["@nuxthub/core", "@nuxt/eslint"],
+  modules: ["@nuxthub/core", "@nuxt/eslint", "@nuxt/ui"],
+  css: ["~/assets/css/main.css"],
+  ui: {
+    prefix: "Nuxt",
+  },
   hub: {
     database: true,
     kv: true,
