@@ -1,6 +1,6 @@
-<script setup lang="ts">
+<script setup>
 const { data: redirects, refresh } = await useFetch("/api/redirects", {
-  transform: (data: { [key: string]: string }) => {
+  transform: (data) => {
     // Transform to text for the textarea
     return {
       text: Object.entries(data).map(([from, to]) => `${from} ${to}`).join(
@@ -12,7 +12,7 @@ const { data: redirects, refresh } = await useFetch("/api/redirects", {
 
 async function updateRedirects() {
   const body = Object.fromEntries(
-    redirects.value!.text.split("\n").map((line) => line.split(" ")),
+    redirects.text.split("\n").map((line) => line.split(" ")),
   );
   await $fetch("/api/redirects", {
     method: "PUT",

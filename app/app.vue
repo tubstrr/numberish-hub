@@ -8,7 +8,7 @@ useSeoMeta({
 
 <template>
   <main>
-    <ImageGallery />
+    <h1>Hello</h1>
     <RedirectsPanel />
     <MessagesPanel />
   </main>

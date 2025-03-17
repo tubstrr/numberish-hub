@@ -1,13 +1,13 @@
-<script setup lang="ts">
-const { data: messages, refresh } = await useFetch("/api/messages");
+<script setup>
+const { data: messages, refresh } = await useFetch("/api/lookup");
 const newMessage = ref("");
 
 async function sendMessage() {
   if (!newMessage.value.trim()) return;
-  await $fetch("/api/messages", {
+  await $fetch("/api/lookup", {
     method: "POST",
     body: {
-      text: newMessage.value,
+      hash: newMessage.value,
     },
   });
   newMessage.value = "";
@@ -25,7 +25,7 @@ async function sendMessage() {
       </button>
     </form>
     <p v-for="message of messages" :key="message.id">
-      {{ message.text }} - {{
+      {{ message.hash }} - {{
         new Date(message.created_at).toLocaleString("fr-FR")
       }}
     </p>
