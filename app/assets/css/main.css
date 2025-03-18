@@ -1,2 +1,75 @@
 @import "tailwindcss" theme(static);
 @import "@nuxt/ui";
+
+@layer base {
+  body {
+    @apply antialiased text-(--ui-text) bg-(--ui-bg) scheme-light
+      dark:scheme-dark;
+  }
+
+  :root, .light, .dark {
+    --background: #f8f8f8;
+    --background-accent: #e1e1e1;
+    --background-rgba: #f8f8f8;
+    --header-background: #fff;
+    --white: #ebebeb;
+    --black: #000;
+    --gray: #c5c5c5;
+    --alt-white: #000;
+    --alt-black: #ebebeb;
+    --alt-gray: #363636;
+    --alt-gray-2: #555555;
+    --pink: #c200bf;
+    --green: #008059;
+    --blue: #4273b3;
+    --tan: #e4c5a9;
+    --drop-shadow: #e1e1e1;
+    --alt-background: #242424;
+    --alt-background-rgba: #242424;
+
+    --text: var(--black);
+    --text-dimmed: var(--alt-gray-2);
+    --alt-text: var(--alt-black);
+    --border: 1px solid var(--gray);
+
+    --ui-text: var(--text);
+    --ui-text-dimmed: var(--text-dimmed);
+    --ui-text-muted: var(--ui-color-neutral-500);
+    --ui-text-toned: var(--ui-color-neutral-600);
+    --ui-text-highlighted: var(--blue);
+    --ui-text-inverted: var(--white);
+
+    --ui-bg: var(--background);
+    --ui-bg-muted: var(--gray);
+    --ui-bg-elevated: var(--header-background);
+    --ui-bg-accented: var(--background-accent);
+    --ui-bg-inverted: var(--black);
+
+    --ui-border: var(--alt-gray-2);
+    --ui-border-muted: var(--header-background);
+    --ui-border-accented: var(--alt-gray);
+    --ui-border-inverted: var(--black);
+
+    --ui-radius: 0px;
+    --ui-container: var(--container-7xl);
+  }
+
+  .dark {
+    --background: #242424;
+    --background-accent: #5b5b5b;
+    --background-rgba: #242424;
+    --header-background: #191919;
+    --white: #000;
+    --black: #ebebeb;
+    --gray: #363636;
+    --pink: #d56cd2;
+    --green: #159d72;
+    --blue: #85b2e5;
+    --tan: #e7ccac;
+    --alt-white: #ebebeb;
+    --alt-black: #000;
+    --alt-gray: #c5c5c5;
+    --alt-gray-2: #9c9c9c;
+    --drop-shadow: #141414;
+  }
+}

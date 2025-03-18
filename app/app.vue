@@ -12,12 +12,10 @@ useSeoMeta({
       <NuxtContainer class="min-h-screen flex items-center justify-center">
         <NuxtCard>
           <template #header>
-            <h1 class="text-2xl font-bold">Welcome to NuxtHub Starter</h1>
+            <CardHeader />
           </template>
           <template #default>
-            <p>
-              A Nuxt template to build your full-stack application on the edge.
-            </p>
+            <CardBody />
           </template>
           <template #footer>
             <NuxtLink to="/about" class="text-blue-500">
