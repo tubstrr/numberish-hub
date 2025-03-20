@@ -1,8 +1,8 @@
 <script setup lang="ts">
 useSeoMeta({
-  title: "NuxtHub Starter",
+  title: "Numberish - Encrypt, Decrypt, and Have Fun!",
   description:
-    "A Nuxt template to build your full-stack application on the edge.",
+    "Encrypt and decrypt messages with Numberish. Share your encrypted messages with friends and family.",
 });
 </script>
 
@@ -16,11 +16,6 @@ useSeoMeta({
           </template>
           <template #default>
             <CardBody />
-          </template>
-          <template #footer>
-            <NuxtLink to="/about" class="text-blue-500">
-              Learn more
-            </NuxtLink>
           </template>
         </NuxtCard>
       </NuxtContainer>
