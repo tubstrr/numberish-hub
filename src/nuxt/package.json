@@ -1,0 +1,29 @@
+{
+  "name": "nuxt",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "migrate": "drizzle-kit migrate",
+    "generate": "drizzle-kit generate",
+    "push": "drizzle-kit push",
+    "pull": "drizzle-kit pull",
+    "full-migration": "drizzle-kit generate && drizzle-kit migrate && drizzle-kit push"
+  },
+  "dependencies": {
+    "@nuxt/ui": "^4.2.0",
+    "dotenv": "^17.2.3",
+    "drizzle-orm": "^0.44.7",
+    "nuxt": "^4.2.1",
+    "pg": "^8.16.3",
+    "typescript": "^5.9.3",
+    "vue": "^3.5.24",
+    "vue-router": "^4.6.3"
+  },
+  "devDependencies": {
+    "drizzle-kit": "^0.31.7"
+  }
+}

@@ -1,0 +1,36 @@
+name: numberlish
+services:
+  database:
+    image: postgis/postgis:16-master
+    platform: linux/amd64
+    volumes:
+      - ../../src/nuxt/database:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_DATABASE}
+    ports:
+      - 5432:5432
+    healthcheck:
+      test: ['CMD', 'pg_isready', '-U', '${DB_USER}', '-d', '${DB_DATABASE}', '-h', 'localhost']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_interval: 5s
+      start_period: 30s
+  
+  nuxt:
+    build:
+      context: ../../
+      dockerfile: etc/docker/development/nuxt/Dockerfile
+    volumes:
+      - ../../src/nuxt:/app
+      - /app/node_modules
+    ports:
+      - 3000:3000
+    environment:
+      NUXT_HOST: 0.0.0.0
+      NUXT_PORT: 3000
+      DATABASE_URL: postgres://${DB_USER}:${DB_PASSWORD}@database:5432/${DB_DATABASE}
+    depends_on:
+      - database
