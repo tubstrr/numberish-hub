@@ -1,0 +1,27 @@
+# Build context hygiene — the compose build context is the repo root.
+# Without this, node_modules and the local Postgres data dir (~400M) get
+# uploaded to the daemon on every build.
+
+.git
+.DS_Store
+**/.DS_Store
+
+# Local Postgres bind-mount (dev only)
+src/nuxt/database
+
+# Node / Nuxt build artifacts
+**/node_modules
+**/.nuxt
+**/.output
+**/.nitro
+**/.cache
+**/dist
+
+# Local env files — production env comes from the NAS, never the image
+**/.env
+**/.env.*
+!**/.env.example
+
+# Logs
+**/*.log
+**/logs

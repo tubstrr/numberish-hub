@@ -1,0 +1,5 @@
+.DS_Store
+**/.DS_Store
+
+# Production secrets live only on the NAS.
+etc/docker/production/.env

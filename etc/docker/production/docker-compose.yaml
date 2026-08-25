@@ -1,0 +1,50 @@
+# Production stack for numberish-hub on the ZimaOS NAS.
+#
+# MANAGED VIA CLI ONLY. Do not import this stack through the CasaOS UI —
+# CasaOS rewrites image tags to :latest on import and auto-update.
+#
+# Always invoke with the DOCKER_CONFIG prefix, e.g.:
+#   DOCKER_CONFIG=/tmp docker compose -f etc/docker/production/docker-compose.yaml up -d --build
+#
+# The database is NOT part of this stack. It lives in the shared `postgresql`
+# container (postgres:17.4); this stack joins that container's network and
+# reaches it by service name. See docs/DEPLOY-NAS.md for the one-time
+# role/database setup.
+
+name: numberish
+
+services:
+  nuxt:
+    build:
+      context: ../../../
+      dockerfile: etc/docker/production/nuxt/Dockerfile
+    image: numberish-hub:latest
+    restart: unless-stopped
+    # LAN-only bind, per homelab security posture. Public access is handled
+    # by Nginx Proxy Manager in front of this port, never by exposing 0.0.0.0.
+    ports:
+      - '10.1.10.101:9505:3000'
+    environment:
+      NUXT_HOST: 0.0.0.0
+      NUXT_PORT: 3000
+      # `postgresql` resolves over the shared external network below.
+      DATABASE_URL: postgres://${DB_USER}:${DB_PASSWORD}@postgresql:5432/${DB_DATABASE}
+    networks:
+      - postgresql_default
+    healthcheck:
+      # busybox wget — the runtime image has no curl.
+      test: ['CMD', 'wget', '-qO-', 'http://localhost:3000/api/test']
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+    logging:
+      driver: json-file
+      options:
+        max-size: '10m'
+        max-file: '3'
+
+networks:
+  # Created by the shared `postgresql` stack; not managed here.
+  postgresql_default:
+    external: true
